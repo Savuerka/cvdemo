@@ -75,6 +75,7 @@ public class ShopListController implements Initializable {
             checks.setTime(Time.valueOf(LocalTime.now()));
             checks.setSumm(Float.parseFloat(summ.getText()));
             dbController.setCheck(connection, checks);
+            summ.setText("");
 
             List<Checklines> checklines = new ArrayList<>();
             backlist.forEach(e-> {
@@ -88,6 +89,11 @@ public class ShopListController implements Initializable {
                 i++;
                 checklines.add(check);
             });
+
+            goods.clear();
+            backlist.removeAll();
+            basket.setItems(backlist);
+            basket.refresh();
 
             dbController.setCheckLines(connection, checklines);
 
